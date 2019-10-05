@@ -1,4 +1,4 @@
-package com.space.speedysensors.ui.main
+package com.space.speedysensors.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 

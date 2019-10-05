@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SpeedySensors</string>
+
+    <!--SENSORS-->
+    <string name="accelerometer">Accelerometer</string>
+    <string name="gyroscope">Gyroscope</string>
+    <string name="thermometer">Thermometer</string>
+    <string name="light">Light</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
 </resources>

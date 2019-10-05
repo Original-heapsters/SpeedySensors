@@ -1,4 +1,4 @@
-package com.space.speedysensors.ui.main
+package com.space.speedysensors.ui.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -14,7 +14,6 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
 
     private var sensorManager: SensorManager? = null
     private var sensor: Sensor? = null
-
 
     private val listener = object : SensorEventListener {
         private var gravity: ArrayList<Float> = arrayListOf(0f, 0f, 0f, 0f, 0f)
@@ -75,9 +74,5 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
 
     private fun stopSensor() {
         sensorManager?.unregisterListener(listener)
-    }
-
-    private fun smoothValue() {
-
     }
 }

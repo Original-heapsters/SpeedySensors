@@ -1,4 +1,4 @@
-package com.space.speedysensors.ui.main
+package com.space.speedysensors.ui.fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,9 +7,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 
 import com.space.speedysensors.R
-import kotlinx.android.synthetic.main.accelerometer_fragment.*
+import com.space.speedysensors.ui.viewmodels.AccelerometerViewModel
+import kotlinx.android.synthetic.main.fragment_accelerometer.*
 
-class AccelerometerFragment : Fragment(R.layout.accelerometer_fragment) {
+class AccelerometerFragment : Fragment(R.layout.fragment_accelerometer) {
 
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(AccelerometerViewModel::class.java)
@@ -25,8 +26,8 @@ class AccelerometerFragment : Fragment(R.layout.accelerometer_fragment) {
                 if (isNegative) {
                     value = value.removePrefix("-")
                 }
-                xNegativeView.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                xValueTextView.text = value
+                textViewNegativeX.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
+                textViewXValue.text = value
             }
         })
 
@@ -37,8 +38,8 @@ class AccelerometerFragment : Fragment(R.layout.accelerometer_fragment) {
                 if (isNegative) {
                     value = value.removePrefix("-")
                 }
-                yNegativeView.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                yValueTextView.text = value
+                textViewNegativeY.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
+                textViewYValue.text = value
             }
         })
 
@@ -49,8 +50,8 @@ class AccelerometerFragment : Fragment(R.layout.accelerometer_fragment) {
                 if (isNegative) {
                     value = value.removePrefix("-")
                 }
-                zNegativeView.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                zValueTextView.text = value
+                textViewNegativeZ.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
+                textViewZValue.text = value
             }
         })
     }

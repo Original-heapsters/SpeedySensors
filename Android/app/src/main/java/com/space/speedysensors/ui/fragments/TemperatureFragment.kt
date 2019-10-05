@@ -2,30 +2,32 @@ package com.space.speedysensors.ui.fragments
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.space.speedysensors.R
+import com.space.speedysensors.ui.viewmodels.TemperatureViewModel
+import kotlinx.android.synthetic.main.fragment_temperature.*
 
-class TemperatureFragment : Fragment() {
+class TemperatureFragment : Fragment(R.layout.fragment_temperature) {
 
-    companion object {
-        fun newInstance() = TemperatureFragment()
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(TemperatureViewModel::class.java)
     }
 
-    private lateinit var viewModel: TemperatureViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.temperature_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TemperatureViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.temperature.observe(this, Observer { x ->
+            x?.let {
+                var value = it.toString()
+                val isNegative = value.first() == '-'
+                if (isNegative) {
+                    value = value.removePrefix("-")
+                }
+                textViewTemperatureValue.text = "$value°C"
+            }
+        })
     }
 
 }

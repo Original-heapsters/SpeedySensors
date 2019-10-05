@@ -20,7 +20,7 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
         private var linearAcceleration: ArrayList<Float> = arrayListOf(0f, 0f, 0f)
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-            println("$$$$$ accuracy changed to $accuracy")
+
         }
 
         override fun onSensorChanged(event: SensorEvent?) {

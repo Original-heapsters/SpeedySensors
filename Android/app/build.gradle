@@ -45,7 +45,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Websocket
-    implementation "com.squareup.okhttp3:okhttp:4.2.1"
+    implementation "com.github.nkzawa:socket.io-client:0.6.0"
 
     // RxKotlin
     def rx_kotlin_version = "2.3.0"

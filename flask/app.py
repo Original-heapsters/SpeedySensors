@@ -2,21 +2,23 @@ import time
 import json
 import random
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins='*')
 
-@socketio.on('connect')
-def onConnect():
-    print("Connected")
+# @app.route('/')
+# def index():
+#     return jsonify("200 or something"), 101
+
+
 
 @socketio.on('echo')
 def echo(data):
     print(data)
-    emit('echo', echo)
+    emit('echo', data)
 
 @socketio.on('subscribe')
 def client_connected(data):
@@ -68,14 +70,14 @@ def notify_room(event_json, roomId):
     emit('update', event_json, room=roomId)
 
 
-@app.route('/test_update', methods=['GET'])
-def test_update():
-    print("TESTING")
-    ranNum = random.randint(1,101)
-    for i in range(ranNum):
-        point = {"price":i}
-        notify_room(point, "default")
-        return "done"
+# @app.route('/test_update', methods=['GET'])
+# def test_update():
+#     print("TESTING")
+#     ranNum = random.randint(1,101)
+#     for i in range(ranNum):
+#         point = {"price":i}
+#         notify_room(point, "default")
+#         return "done"
 
 if __name__ == '__main__':
     import os

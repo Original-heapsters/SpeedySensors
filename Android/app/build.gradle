@@ -35,10 +35,21 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
 
+    // JSON
+    def moshi_version = "1.8.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+
     // Navigation
     def nav_version = "2.1.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Websocket
+    implementation "com.squareup.okhttp3:okhttp:4.2.1"
+
+    // RxKotlin
+    def rx_kotlin_version = "2.3.0"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
 
     // Testing
     implementation 'com.android.support:support-v4:28.0.0'

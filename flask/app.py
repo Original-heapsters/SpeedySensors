@@ -33,21 +33,17 @@ def client_connected(data):
       "event_type": "subscribe"
     }
     '''
-    roomId = data.get("room", "default")
-    print("Client subscribed to " + roomId)
-    join_room(roomId)
-    notify_room(data, roomId)
+    notify_room(data)
 
 @socketio.on('socketboi')
 def sensor_update(data):
     '''
 
     '''
-    roomId = data.get("room", "default")
     print("\n\n\n\n\n\n\n\n\n\n\n-------------------------------")
     print(data)
     print("-------------------------------")
-    # notify_room(point, roomId)
+    notify_room(data)
 
 @socketio.on('unsubscribe')
 def on_leave(data):
@@ -62,12 +58,10 @@ def on_leave(data):
       "event_type": "subscribe"
     }
     '''
-    roomId = data.get("room", "default")
-    leave_room(roomId)
-    notify_room(point, roomId)
+    notify_room(point)
 
-def notify_room(event_json, roomId):
-    emit('update', event_json, room=roomId)
+def notify_room(event_json):
+    emit('update', event_json)
 
 
 # @app.route('/test_update', methods=['GET'])

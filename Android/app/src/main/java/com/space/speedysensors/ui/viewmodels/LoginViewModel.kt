@@ -1,7 +1,7 @@
-package com.space.speedysensors.ui.fragments
+package com.space.speedysensors.ui.viewmodels
 
-import android.arch.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class LoginViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 }

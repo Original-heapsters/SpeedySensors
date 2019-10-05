@@ -23,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:text="0lx"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTitle"
         app:layout_constraintStart_toStartOf="@+id/textViewTitle"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 

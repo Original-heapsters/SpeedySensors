@@ -9,7 +9,6 @@ import android.hardware.SensorManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.space.speedysensors.models.SensorPayload
 import com.space.speedysensors.services.SocketService
 
 class AccelerometerViewModel(application: Application) : AndroidViewModel(application) {
@@ -73,7 +72,7 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
         val application = getApplication<Application>()
         sensorManager = application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        sensorManager?.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_GAME)
+        sensorManager?.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_UI)
     }
 
     private fun stopSensor() {

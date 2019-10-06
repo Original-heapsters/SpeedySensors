@@ -46,7 +46,7 @@ def sensor_update(data):
     anomaly = detector.analyze(json.loads(data))
     notify_room(data)
     if anomaly:
-        emit('anomaly', json.dumps(anomaly))
+        emit('anomaly', json.dumps(anomaly), broadcast=True)
 
 
 @socketio.on('unsubscribe')

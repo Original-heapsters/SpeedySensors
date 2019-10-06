@@ -21,6 +21,7 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:singleLine="true"
             android:hint="Username" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -39,6 +40,8 @@
             android:id="@+id/editTextIP"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
             android:hint="IP Address" />
 
     </com.google.android.material.textfield.TextInputLayout>

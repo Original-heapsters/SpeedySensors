@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.space.speedysensors.R
-import com.space.speedysensors.models.SensorPayload
 import com.space.speedysensors.services.SocketService
 import com.space.speedysensors.ui.viewmodels.MainViewModel
 
@@ -22,6 +21,5 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         SocketService.instance.connect()
-        SocketService.instance.sendData(SensorPayload(accelerometer = arrayListOf(69f, 69f, 69f)))
     }
 }

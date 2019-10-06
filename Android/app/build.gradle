@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion 28
@@ -29,6 +30,7 @@ dependencies {
 
     // JSON
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0"
+
 
     // Android
     implementation "androidx.appcompat:appcompat:1.1.0"

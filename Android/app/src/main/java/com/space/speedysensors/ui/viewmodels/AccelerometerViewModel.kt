@@ -9,6 +9,8 @@ import android.hardware.SensorManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.space.speedysensors.models.SensorPayload
+import com.space.speedysensors.services.SocketService
 
 class AccelerometerViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -40,6 +42,12 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
                 _x.postValue(linearAcceleration[0])
                 _y.postValue(linearAcceleration[1])
                 _z.postValue(linearAcceleration[2])
+
+                val payload = SensorPayload(
+                        id = "Sick",
+                        accelerometer = event.values
+                )
+                SocketService.instance.sendData(payload)
             }
         }
     }

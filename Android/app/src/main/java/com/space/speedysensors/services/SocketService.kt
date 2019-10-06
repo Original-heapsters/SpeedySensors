@@ -1,7 +1,5 @@
 package com.space.speedysensors.services
 
-import android.util.Log
-import android.widget.Toast
 import com.github.nkzawa.emitter.Emitter
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
@@ -31,11 +29,10 @@ class SocketService {
     }
 
     fun sendData(data: SensorPayload) {
-//        val json = Json(JsonConfiguration.Stable)
-//        val jsonData = json.stringify(SensorPayload.serializer(), data)
+        val json = Json(JsonConfiguration.Stable)
+        val jsonData = json.stringify(SensorPayload.serializer(), data)
 
-
-        socket?.emit("socketboi", data)
+        socket?.emit("socketboi", jsonData)
     }
 
     fun disconnect() {

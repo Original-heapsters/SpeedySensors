@@ -9,7 +9,7 @@ import com.space.speedysensors.R
 import com.space.speedysensors.models.SensorPayload
 import kotlinx.android.synthetic.main.list_view_payload.view.*
 
-class PayloadAdapter: RecyclerView.Adapter<PayloadAdapter.PayloadViewHolder>() {
+class PayloadAdapter: RecyclerView.Adapter<PayloadViewHolder>() {
 
     private var payloads: ArrayList<SensorPayload> = arrayListOf()
 
@@ -41,13 +41,14 @@ class PayloadAdapter: RecyclerView.Adapter<PayloadAdapter.PayloadViewHolder>() {
     override fun getItemCount(): Int = payloads.size
 
     override fun onBindViewHolder(holder: PayloadViewHolder, position: Int) {
+        holder.bind(payloads[position])
         holder.itemView.textViewUsername.text = payloads[position].id
         holder.itemView.textViewAccelerometer.text = payloads[position].accelerometer
                 .map { value -> value.toString() }
                 .reduce { acc, fl -> "$acc, $fl" }.toString()
     }
 
-    class PayloadViewHolder(view: View): RecyclerView.ViewHolder(view)
+
 
     private inner class PayloadDiffCallback(
             private val mOldList: ArrayList<SensorPayload>,

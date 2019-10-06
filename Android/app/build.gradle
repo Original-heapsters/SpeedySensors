@@ -48,6 +48,9 @@ dependencies {
     // Websocket
     implementation "com.github.nkzawa:socket.io-client:0.6.0"
 
+    //Charting
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
     // RxKotlin
     def rx_kotlin_version = "2.3.0"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"

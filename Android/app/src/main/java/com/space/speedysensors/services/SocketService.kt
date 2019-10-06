@@ -27,14 +27,23 @@ class SocketService {
         }
     }
 
-    fun sendData(data: SensorPayload) {
+    fun sendData(data: FloatArray) {
+        val payload = SensorPayload(
+                id = username,
+                timestamp = System.currentTimeMillis() / 1000L,
+                accelerometer = data
+        )
         val json = Json(JsonConfiguration.Stable)
-        val jsonData = json.stringify(SensorPayload.serializer(), data)
+        val jsonData = json.stringify(SensorPayload.serializer(), payload)
         socket?.emit("socketboi", jsonData)
     }
 
     fun addOnUpdateListener(listener: Emitter.Listener) {
         socket?.on("update", listener)
+    }
+
+    fun addOnAnomalyListener(listener: Emitter.Listener) {
+        socket?.on("anomaly", listener)
     }
 
     fun disconnect() {

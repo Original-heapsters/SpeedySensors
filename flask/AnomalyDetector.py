@@ -78,7 +78,6 @@ class AnomalyDetector(object):
             "anomaly": "z",\
             "magnitude":anomaly_z}
 
-        print(self.running_data)
         return None
 
     def rolling_avg(self, x, N):

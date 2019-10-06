@@ -20,6 +20,7 @@ class AnomalyDetector(object):
         self.running_data = running_data
         self.lookback = 5
         self.max_consideration = 100
+        self.threshold = 5
 
 
     def analyze(self, new_data):
@@ -58,19 +59,19 @@ class AnomalyDetector(object):
         print(anomaly_y)
         print(anomaly_z)
 
-        if anomaly_x > 1 and len(dataset["data"]) > self.lookback:
+        if anomaly_x > self.threshold and len(dataset["data"]) > self.lookback:
             print("X ANOMALY")
             return {\
             "id":new_data["id"],\
             "anomaly": "x",\
             "magnitude":anomaly_x}
-        if anomaly_y > 1 and len(dataset["data"]) > self.lookback:
+        if anomaly_y > self.threshold and len(dataset["data"]) > self.lookback:
             print("Y ANOMALY")
             return {\
             "id":new_data["id"],\
             "anomaly": "y",\
             "magnitude":anomaly_y}
-        if anomaly_z > 1 and len(dataset["data"]) > self.lookback:
+        if anomaly_z > self.threshold and len(dataset["data"]) > self.lookback:
             print("Z ANOMALY")
             return {\
             "id":new_data["id"],\

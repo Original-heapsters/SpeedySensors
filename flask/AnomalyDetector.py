@@ -20,7 +20,7 @@ class AnomalyDetector(object):
         self.running_data = running_data
         self.lookback = 5
         self.max_consideration = 100
-        self.threshold = 15
+        self.threshold = 10
 
 
     def analyze(self, new_data):

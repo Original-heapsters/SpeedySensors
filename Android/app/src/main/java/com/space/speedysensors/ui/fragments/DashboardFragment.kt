@@ -1,6 +1,8 @@
 package com.space.speedysensors.ui.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -47,7 +49,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 payloadAdapter.updatePayloads(users)
             }
             val diff = System.currentTimeMillis() - users[0].timestamp.toDouble()
-            mSeries.appendData(DataPoint(diff/250 + 10, users[0].accelerometer.average()),true,400)
+            Handler().post {
+                mSeries.appendData(DataPoint(diff/250 + 10, users[0].accelerometer.average()),true,400)
+            }
+
+
         })
 
         view.graph.viewport.isXAxisBoundsManual = true

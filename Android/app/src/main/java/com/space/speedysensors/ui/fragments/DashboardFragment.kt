@@ -1,6 +1,7 @@
 package com.space.speedysensors.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -46,13 +47,14 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             users?.let {
                 payloadAdapter.updatePayloads(users)
             }
-            mSeries.appendData(DataPoint(users[0].timestamp.toDouble(), users[0].accelerometer.average()),true,100000)
+            val diff = System.currentTimeMillis() - users[0].timestamp
+            mSeries.appendData(DataPoint(diff.toDouble(), users[0].accelerometer.average()),true,100000)
         })
 
         view.graph.viewport.isXAxisBoundsManual = true
         view.graph.viewport.isYAxisBoundsManual = true
         view.graph.viewport.setMinX(0.0)
-        view.graph.viewport.setMaxX(40.0)
+        view.graph.viewport.setMaxX(400.0)
         view.graph.viewport.setMinY(0.0)
         view.graph.viewport.setMaxY(10.0)
 
@@ -63,6 +65,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         viewModel.anomalies.observe(this, Observer { anomalies ->
             anomalies?.let {
                 payloadAdapter.anomalyDetected(anomalies)
+                Log.d("TEST_FRAG", anomalies.size.toString())
             }
         })
     }

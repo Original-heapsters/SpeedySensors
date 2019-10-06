@@ -12,6 +12,9 @@
         android:name="com.space.speedysensors.ui.fragments.AccelerometerFragment"
         android:layout_width="160dp"
         android:layout_height="140dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentTemperatureSensor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_accelerometer" />
@@ -21,6 +24,9 @@
         android:name="com.space.speedysensors.ui.fragments.TemperatureFragment"
         android:layout_width="160dp"
         android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentLightSensor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentAccelerometerSensor"
         tools:layout="@layout/fragment_temperature" />
@@ -30,6 +36,9 @@
         android:name="com.space.speedysensors.ui.fragments.LightSensorFragment"
         android:layout_width="160dp"
         android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentPressureSensor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentTemperatureSensor"
         tools:layout="@layout/fragment_light_sensor" />
@@ -39,6 +48,9 @@
         android:name="com.space.speedysensors.ui.fragments.PressureSensorFragment"
         android:layout_width="160dp"
         android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentHumiditySensor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentLightSensor"
         tools:layout="@layout/fragment_pressure_sensor" />
@@ -48,6 +60,9 @@
         android:name="com.space.speedysensors.ui.fragments.HumiditySensorFragment"
         android:layout_width="160dp"
         android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragmentPressureSensor"
         tools:layout="@layout/fragment_humidity_sensor" />

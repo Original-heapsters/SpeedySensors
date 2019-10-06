@@ -47,15 +47,15 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 payloadAdapter.updatePayloads(users)
             }
             val diff = System.currentTimeMillis() - users[0].timestamp.toDouble()
-            mSeries.appendData(DataPoint(diff, users[0].accelerometer.average()),true,100000)
+            mSeries.appendData(DataPoint(diff/250 + 10, users[0].accelerometer.average()),true,400)
         })
 
         view.graph.viewport.isXAxisBoundsManual = true
         view.graph.viewport.isYAxisBoundsManual = true
         view.graph.viewport.setMinX(0.0)
         view.graph.viewport.setMaxX(40.0)
-        view.graph.viewport.setMinY(0.0)
-        view.graph.viewport.setMaxY(10.0)
+        view.graph.viewport.setMinY(-15.0)
+        view.graph.viewport.setMaxY(15.0)
 
         view.graph.gridLabelRenderer.labelVerticalWidth = 100;
         mSeries.isDrawDataPoints = true

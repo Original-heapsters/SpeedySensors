@@ -49,7 +49,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
 
                         SocketService.instance.addOnUpdateListener(onUpdate)
                     }
-                    .debounce(100, TimeUnit.MILLISECONDS)
+                    .debounce(20, TimeUnit.MILLISECONDS)
                     .observeOn(Schedulers.io())
                     .subscribeOn(Schedulers.io())
 

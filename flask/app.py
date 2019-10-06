@@ -4,16 +4,12 @@ import random
 
 from flask import Flask, jsonify
 from flask_socketio import SocketIO, emit, join_room, leave_room
+import AnomalyDetector
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins='*')
-
-# @app.route('/')
-# def index():
-#     return jsonify("200 or something"), 101
-
-
+detector = AnomalyDetector.AnomalyDetector()
 
 @socketio.on('echo')
 def echo(data):
@@ -33,21 +29,25 @@ def client_connected(data):
       "event_type": "subscribe"
     }
     '''
-    roomId = data.get("room", "default")
-    print("Client subscribed to " + roomId)
-    join_room(roomId)
-    notify_room(data, roomId)
+    notify_room(data)
 
 @socketio.on('socketboi')
 def sensor_update(data):
     '''
+    {
+        "id":"gwijoaas09-wg5sdfs4rege-w4h54h-w4hw5wegeg",
+        "accelerometer": [0.0,0.0,0.0]
+    }
 
     '''
-    roomId = data.get("room", "default")
     print("\n\n\n\n\n\n\n\n\n\n\n-------------------------------")
     print(data)
     print("-------------------------------")
-    # notify_room(point, roomId)
+    anomaly = detector.analyze(json.loads(data))
+    notify_room(data)
+    if anomaly:
+        emit('anomaly', json.dumps(anomaly))
+
 
 @socketio.on('unsubscribe')
 def on_leave(data):
@@ -62,22 +62,12 @@ def on_leave(data):
       "event_type": "subscribe"
     }
     '''
-    roomId = data.get("room", "default")
-    leave_room(roomId)
-    notify_room(point, roomId)
+    notify_room(point)
 
-def notify_room(event_json, roomId):
-    emit('update', event_json, room=roomId)
+def notify_room(event_json):
+    emit('update', event_json)
 
 
-# @app.route('/test_update', methods=['GET'])
-# def test_update():
-#     print("TESTING")
-#     ranNum = random.randint(1,101)
-#     for i in range(ranNum):
-#         point = {"price":i}
-#         notify_room(point, "default")
-#         return "done"
 
 if __name__ == '__main__':
     import os

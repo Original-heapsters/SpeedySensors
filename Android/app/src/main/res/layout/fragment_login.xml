@@ -21,7 +21,28 @@
             android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:singleLine="true"
             android:hint="Username" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextIPLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameLayout">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextIP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:hint="IP Address" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -32,7 +53,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/editTextIPLayout">
 
         <RadioButton
             android:id="@+id/radioButtonFirefighter"

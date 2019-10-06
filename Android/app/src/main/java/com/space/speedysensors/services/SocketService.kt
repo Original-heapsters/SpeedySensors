@@ -18,11 +18,12 @@ class SocketService {
     private var socket: Socket? = null
     private var username: String = ""
     private var role: String = ""
+    var socketAddres:String = ""
 
     fun connect(username: String, role: String) {
         this.username = username
         this.role = role
-        this.socket = IO.socket("http://10.64.6.95:5000/").apply {
+        this.socket = IO.socket(socketAddres).apply {
             connect()
         }
     }

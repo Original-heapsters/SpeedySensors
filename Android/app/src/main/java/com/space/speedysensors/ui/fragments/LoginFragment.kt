@@ -21,6 +21,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         buttonLogin.setOnClickListener {
             val username = editTextUsername.text?.toString() ?: ""
+            val sockerAddr= editTextIP.text?.toString() ?: ""
             val role = when(radioGroup.checkedRadioButtonId) {
                 R.id.radioButtonFirefighter -> "Firefighter"
                 R.id.radioButtonPoliceOfficer -> "Police Officer"
@@ -29,7 +30,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 else -> "badboi"
             }
 
-            if (username.isNotEmpty() && role != "badboi") {
+            if (username.isNotEmpty() && sockerAddr.isNotEmpty() && role != "badboi") {
+                SocketService.instance.socketAddres = "http://${sockerAddr}:5000"
                 SocketService.instance.connect(username, role)
                 when (role) {
                     "Manager" -> { findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment) }

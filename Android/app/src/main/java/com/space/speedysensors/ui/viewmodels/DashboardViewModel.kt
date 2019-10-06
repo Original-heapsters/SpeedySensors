@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val compositeDisposable = CompositeDisposable()
+//    private val compositeDisposable = CompositeDisposable()
 
     private val _connectedUsers = MutableLiveData<ArrayList<SensorPayload>>()
     val connectedUsers: LiveData<ArrayList<SensorPayload>>
@@ -30,29 +30,29 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val anomalies: LiveData<ArrayList<Anomaly>>
         get() = _anomalies
 
-    private val updateObservable =
-            Observable
-                    .create<ArrayList<SensorPayload>> { emitter ->
-                        val onUpdate = Emitter.Listener { args ->
-                            val payload = args[0] as String
-                            val json = Json(JsonConfiguration.Stable)
-                            val data = json.parse(SensorPayload.serializer(), payload)
+//    private val updateObservable =
+//            Observable
+//                    .create<ArrayList<SensorPayload>> { emitter ->
+    private val onUpdate = Emitter.Listener { args ->
+        val payload = args[0] as String
+        val json = Json(JsonConfiguration.Stable)
+        val data = json.parse(SensorPayload.serializer(), payload)
 
-                            val currentUsers = _connectedUsers.value ?: arrayListOf()
-                            currentUsers.firstOrNull { it.id == data.id }?.apply {
-                                accelerometer = data.accelerometer
-                            } ?: run {
-                                currentUsers.add(data)
-                            }
+        val currentUsers = _connectedUsers.value ?: arrayListOf()
+        currentUsers.firstOrNull { it.id == data.id }?.apply {
+            accelerometer = data.accelerometer
+        } ?: run {
+            currentUsers.add(data)
+        }
 
-                            emitter.onNext(currentUsers)
-                        }
+//                            emitter.onNext(currentUsers)
+    }
 
-                        SocketService.instance.addOnUpdateListener(onUpdate)
-                    }
-                    .debounce(20, TimeUnit.MILLISECONDS)
-                    .observeOn(Schedulers.io())
-                    .subscribeOn(Schedulers.io())
+//                        SocketService.instance.addOnUpdateListener(onUpdate)
+//                    }
+//                    .debounce(20, TimeUnit.MILLISECONDS)
+//                    .observeOn(Schedulers.io())
+//                    .subscribeOn(Schedulers.io())
 
 
 
@@ -71,15 +71,16 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     init {
+        SocketService.instance.addOnUpdateListener(onUpdate)
         SocketService.instance.addOnAnomalyListener(onAnomaly)
 
-        updateObservable
-                .subscribeBy(
-                        onError = {  },
-                        onNext = { _connectedUsers.postValue(it) },
-                        onComplete = {  }
-                )
-                .addTo(compositeDisposable)
+//        updateObservable
+//                .subscribeBy(
+//                        onError = {  },
+//                        onNext = { _connectedUsers.postValue(it) },
+//                        onComplete = {  }
+//                )
+//                .addTo(compositeDisposable)
     }
 
     override fun onCleared() {

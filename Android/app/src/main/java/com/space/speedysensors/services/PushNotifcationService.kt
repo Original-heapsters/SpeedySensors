@@ -4,7 +4,9 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Context.VIBRATOR_SERVICE
 import android.os.Build
+import android.os.VibrationEffect
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -28,6 +30,7 @@ class PushNotifcationService {
         builder.setContentTitle(title)
         builder.setContentText(content)
         builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        builder.setVibrate(longArrayOf(0, 40000, 200, 40000))
         builder.priority = NotificationCompat.PRIORITY_DEFAULT
         builder.setChannelId(channelId)
         with(NotificationManagerCompat.from(ctx)) {

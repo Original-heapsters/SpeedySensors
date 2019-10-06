@@ -24,4 +24,5 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
         tools:text="Accelerometer" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

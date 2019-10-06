@@ -60,6 +60,7 @@ class PayloadAdapter(
         notifyDataSetChanged()
     }
 
+
     private inner class PayloadDiffCallback(
             private val mOldList: ArrayList<SensorPayload>,
             private val mNewList: ArrayList<SensorPayload>

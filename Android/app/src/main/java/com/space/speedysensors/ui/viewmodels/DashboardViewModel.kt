@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.github.nkzawa.emitter.Emitter
 import com.space.speedysensors.models.Anomaly
 import com.space.speedysensors.models.SensorPayload
+import com.space.speedysensors.services.PushNotifcationService
 import com.space.speedysensors.services.SocketService
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -65,6 +66,7 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             currentAnomalies.add(data)
         }
 
+        PushNotifcationService.instance.show(application.applicationContext, "Emergency!!", "Anomaly detected from ${data.id}!")
         _anomalies.postValue(currentAnomalies)
     }
 

@@ -18,12 +18,12 @@ class SocketService {
     private var socket: Socket? = null
     private var username: String = ""
     private var role: String = ""
-    var socketAddres:String = ""
+    var socketAddress: String = ""
 
     fun connect(username: String, role: String) {
         this.username = username
         this.role = role
-        this.socket = IO.socket(socketAddres).apply {
+        this.socket = IO.socket(socketAddress).apply {
             connect()
         }
     }
@@ -31,6 +31,7 @@ class SocketService {
     fun sendData(data: FloatArray) {
         val payload = SensorPayload(
                 id = username,
+                role = role,
                 timestamp = System.currentTimeMillis() / 1000L,
                 accelerometer = data
         )

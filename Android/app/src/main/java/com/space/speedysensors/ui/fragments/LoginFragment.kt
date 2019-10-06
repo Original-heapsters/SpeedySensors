@@ -31,7 +31,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
 
             if (username.isNotEmpty() && sockerAddr.isNotEmpty() && role != "badboi") {
-                SocketService.instance.socketAddres = "http://${sockerAddr}:5000"
+                SocketService.instance.socketAddress = "http://${sockerAddr}:5000"
                 SocketService.instance.connect(username, role)
                 when (role) {
                     "Manager" -> { findNavController().navigate(R.id.action_loginFragment_to_dashboardFragment) }

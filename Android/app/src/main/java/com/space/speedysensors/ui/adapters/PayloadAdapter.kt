@@ -51,7 +51,8 @@ class PayloadAdapter(
         val backgroundColor = ContextCompat.getColor(holder.itemView.context, if (userIsAnomaly) R.color.colorAccent else android.R.color.white)
         holder.payload = payload
         holder.listener = payloadListener
-        holder.itemView.textViewUsername.text = payloads[position].id
+        holder.itemView.textViewUsername.text = payload.id
+        holder.itemView.textViewRole.text = payload.role
         holder.itemView.setBackgroundColor(backgroundColor)
     }
 

@@ -17,12 +17,12 @@
 
     <TextView
         style="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/textViewAccelerometer"
+        android:id="@+id/textViewRole"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
-        tools:text="Accelerometer" />
+        tools:text="Role" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

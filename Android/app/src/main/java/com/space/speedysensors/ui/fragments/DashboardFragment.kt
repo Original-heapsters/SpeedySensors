@@ -46,7 +46,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             users?.let {
                 payloadAdapter.updatePayloads(users)
             }
-            mSeries.appendData(DataPoint(users[0].timestamp.toDouble(), users[0].accelerometer.average()),true,100000)
+            val diff = System.currentTimeMillis() - users[0].timestamp.toDouble()
+            mSeries.appendData(DataPoint(diff, users[0].accelerometer.average()),true,100000)
         })
 
         view.graph.viewport.isXAxisBoundsManual = true

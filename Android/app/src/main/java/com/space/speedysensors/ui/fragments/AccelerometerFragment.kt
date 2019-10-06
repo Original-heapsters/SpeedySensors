@@ -23,7 +23,7 @@ class AccelerometerFragment : Fragment(R.layout.fragment_accelerometer) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        this.mSocket = IO.socket("http://192.168.86.239:5000/")
+        this.mSocket = IO.socket("http://10.64.6.95     :5000/")
 
         this.mSocket?.connect()
         if (mSocket?.connected() == true){

@@ -32,7 +32,7 @@ class SocketService {
         val payload = SensorPayload(
                 id = username,
                 role = role,
-                timestamp = System.currentTimeMillis() / 1000L,
+                timestamp = System.currentTimeMillis(),
                 accelerometer = data
         )
         val json = Json(JsonConfiguration.Stable)

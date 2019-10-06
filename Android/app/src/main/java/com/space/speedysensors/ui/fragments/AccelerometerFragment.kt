@@ -30,7 +30,7 @@ class AccelerometerFragment : Fragment(R.layout.fragment_accelerometer) {
                     value = value.removePrefix("-")
                 }
                 textViewNegativeX.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                textViewXValue.text = value
+                textViewXValue.text = "%.1f".format(value.toFloat())
             }
         })
 
@@ -42,7 +42,7 @@ class AccelerometerFragment : Fragment(R.layout.fragment_accelerometer) {
                     value = value.removePrefix("-")
                 }
                 textViewNegativeY.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                textViewYValue.text = value
+                textViewYValue.text = "%.1f".format(value.toFloat())
             }
         })
 
@@ -54,7 +54,7 @@ class AccelerometerFragment : Fragment(R.layout.fragment_accelerometer) {
                     value = value.removePrefix("-")
                 }
                 textViewNegativeZ.visibility = if (isNegative) View.VISIBLE else View.INVISIBLE
-                textViewZValue.text = value
+                textViewZValue.text = "%.1f".format(value.toFloat())
             }
         })
     }

@@ -3,8 +3,11 @@ package com.space.speedysensors.ui.fragments
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.github.nkzawa.socketio.client.IO
+import com.github.nkzawa.socketio.client.Socket
 
 import com.space.speedysensors.R
 import com.space.speedysensors.ui.viewmodels.AccelerometerViewModel

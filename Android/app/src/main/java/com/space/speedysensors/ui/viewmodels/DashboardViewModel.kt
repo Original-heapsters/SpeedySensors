@@ -9,18 +9,10 @@ import com.space.speedysensors.models.Anomaly
 import com.space.speedysensors.models.SensorPayload
 import com.space.speedysensors.services.PushNotifcationService
 import com.space.speedysensors.services.SocketService
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
-import java.util.concurrent.TimeUnit
 
 class DashboardViewModel(application: Application) : AndroidViewModel(application) {
-
-//    private val compositeDisposable = CompositeDisposable()
 
     private val _connectedUsers = MutableLiveData<ArrayList<SensorPayload>>()
     val connectedUsers: LiveData<ArrayList<SensorPayload>>
@@ -30,9 +22,6 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     val anomalies: LiveData<ArrayList<Anomaly>>
         get() = _anomalies
 
-//    private val updateObservable =
-//            Observable
-//                    .create<ArrayList<SensorPayload>> { emitter ->
     private val onUpdate = Emitter.Listener { args ->
         val payload = args[0] as String
         val json = Json(JsonConfiguration.Stable)
@@ -45,16 +34,8 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
             currentUsers.add(data)
         }
 
-//                            emitter.onNext(currentUsers)
+        _connectedUsers.postValue(currentUsers)
     }
-
-//                        SocketService.instance.addOnUpdateListener(onUpdate)
-//                    }
-//                    .debounce(20, TimeUnit.MILLISECONDS)
-//                    .observeOn(Schedulers.io())
-//                    .subscribeOn(Schedulers.io())
-
-
 
     private val onAnomaly = Emitter.Listener { args ->
         val payload = args[0] as String
@@ -73,14 +54,6 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         SocketService.instance.addOnUpdateListener(onUpdate)
         SocketService.instance.addOnAnomalyListener(onAnomaly)
-
-//        updateObservable
-//                .subscribeBy(
-//                        onError = {  },
-//                        onNext = { _connectedUsers.postValue(it) },
-//                        onComplete = {  }
-//                )
-//                .addTo(compositeDisposable)
     }
 
     override fun onCleared() {

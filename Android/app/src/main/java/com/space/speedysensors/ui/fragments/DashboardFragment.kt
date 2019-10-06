@@ -2,7 +2,7 @@ package com.space.speedysensors.ui.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.IntegerRes
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,7 +17,9 @@ import com.anychart.enums.TooltipPositionMode
 import com.anychart.graphics.vector.Stroke
 
 import com.space.speedysensors.R
+import com.space.speedysensors.models.SensorPayload
 import com.space.speedysensors.ui.adapters.PayloadAdapter
+import com.space.speedysensors.ui.adapters.PayloadViewHolder
 import com.space.speedysensors.ui.viewmodels.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
@@ -34,6 +36,14 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(DashboardViewModel::class.java)
     }
+
+    private val payloadCellListener = object : PayloadViewHolder.PayloadViewHolderListener {
+        override fun cellClicked(payload: SensorPayload) {
+            viewModel.resolveAnomaly(payload.id)
+        }
+    }
+
+    private val payloadAdapter = PayloadAdapter(payloadCellListener)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,6 +72,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         mSeries.isDrawDataPoints = true
         mSeries.isDrawBackground = true
         view.graph.addSeries(mSeries)
+        viewModel.anomalies.observe(this, Observer { anomalies ->
+            anomalies?.let {
+                payloadAdapter.anomalyDetected(anomalies)
+            }
+        })
     }
 
     private fun setupChart(): Cartesian? {

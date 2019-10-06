@@ -16,14 +16,13 @@ class SocketService {
     }
 
     private var socket: Socket? = null
+    private var username: String = ""
+    private var role: String = ""
 
-    private val onEcho = Emitter.Listener { args ->
-        val data = args[0] as String
-    }
-
-    fun connect() {
+    fun connect(username: String, role: String) {
+        this.username = username
+        this.role = role
         this.socket = IO.socket("http://10.64.6.95:5000/").apply {
-            on("echo", onEcho)
             connect()
         }
     }
@@ -31,8 +30,11 @@ class SocketService {
     fun sendData(data: SensorPayload) {
         val json = Json(JsonConfiguration.Stable)
         val jsonData = json.stringify(SensorPayload.serializer(), data)
-
         socket?.emit("socketboi", jsonData)
+    }
+
+    fun addOnUpdateListener(listener: Emitter.Listener) {
+        socket?.on("update", listener)
     }
 
     fun disconnect() {

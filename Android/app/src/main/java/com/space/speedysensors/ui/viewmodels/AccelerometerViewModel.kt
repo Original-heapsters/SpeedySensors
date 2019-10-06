@@ -43,11 +43,7 @@ class AccelerometerViewModel(application: Application) : AndroidViewModel(applic
                 _y.postValue(linearAcceleration[1])
                 _z.postValue(linearAcceleration[2])
 
-                val payload = SensorPayload(
-                        id = "Sick",
-                        accelerometer = event.values
-                )
-                SocketService.instance.sendData(payload)
+                SocketService.instance.sendData(event.values)
             }
         }
     }

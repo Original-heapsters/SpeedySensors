@@ -3,15 +3,20 @@ package com.space.speedysensors.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.space.speedysensors.R
+import com.space.speedysensors.models.Anomaly
 import com.space.speedysensors.models.SensorPayload
 import kotlinx.android.synthetic.main.list_view_payload.view.*
 
-class PayloadAdapter: RecyclerView.Adapter<PayloadViewHolder>() {
+class PayloadAdapter(
+    private val payloadListener: PayloadViewHolder.PayloadViewHolderListener
+): RecyclerView.Adapter<PayloadViewHolder>() {
 
     private var payloads: ArrayList<SensorPayload> = arrayListOf()
+    private var anomalies: ArrayList<Anomaly> = arrayListOf()
 
     fun updatePayloads(list: ArrayList<SensorPayload>) {
         payloads = list
@@ -41,13 +46,19 @@ class PayloadAdapter: RecyclerView.Adapter<PayloadViewHolder>() {
     override fun getItemCount(): Int = payloads.size
 
     override fun onBindViewHolder(holder: PayloadViewHolder, position: Int) {
-        holder.bind(payloads[position])
+        val payload = payloads[position]
+        val userIsAnomaly = anomalies.filter { it.id == payload.id }.isNotEmpty()
+        val backgroundColor = ContextCompat.getColor(holder.itemView.context, if (userIsAnomaly) R.color.colorAccent else android.R.color.white)
+        holder.payload = payload
+        holder.listener = payloadListener
         holder.itemView.textViewUsername.text = payloads[position].id
-        holder.itemView.textViewAccelerometer.text = payloads[position].accelerometer
-                .map { value -> value.toString() }
-                .reduce { acc, fl -> "$acc, $fl" }.toString()
+        holder.itemView.setBackgroundColor(backgroundColor)
     }
 
+    fun anomalyDetected(anomalies: ArrayList<Anomaly>) {
+        this.anomalies = anomalies
+        notifyDataSetChanged()
+    }
 
 
     private inner class PayloadDiffCallback(

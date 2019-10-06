@@ -2,6 +2,7 @@ package com.space.speedysensors.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.IntegerRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,9 +22,14 @@ import com.space.speedysensors.ui.viewmodels.DashboardViewModel
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
+
+
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private val payloadAdapter = PayloadAdapter()
+    private val mSeries = LineGraphSeries<DataPoint>()
 
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(DashboardViewModel::class.java)
@@ -42,9 +48,20 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             users?.let {
                 payloadAdapter.updatePayloads(users)
             }
+            mSeries.appendData(DataPoint(mSeries.highestValueX + Math.random() * 2, users[0].accelerometer.average()),true,100000)
         })
 
-        view.anyChartView.setChart(setupChart())
+        view.graph.viewport.isXAxisBoundsManual = true
+        view.graph.viewport.isYAxisBoundsManual = true
+        view.graph.viewport.setMinX(0.0)
+        view.graph.viewport.setMaxX(40.0)
+        view.graph.viewport.setMinY(0.0)
+        view.graph.viewport.setMaxY(10.0)
+
+        view.graph.gridLabelRenderer.labelVerticalWidth = 100;
+        mSeries.isDrawDataPoints = true
+        mSeries.isDrawBackground = true
+        view.graph.addSeries(mSeries)
     }
 
     private fun setupChart(): Cartesian? {

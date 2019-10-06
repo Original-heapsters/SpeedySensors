@@ -65,7 +65,7 @@ def on_leave(data):
     notify_room(point)
 
 def notify_room(event_json):
-    emit('update', event_json)
+    emit('update', event_json, broadcast=True)
 
 
 

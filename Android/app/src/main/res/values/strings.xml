@@ -8,4 +8,10 @@
     <string name="light">Light</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
+
+    <!--ROLES-->
+    <string name="firefighter">Firefighter</string>
+    <string name="police_officer">Police Officer</string>
+    <string name="emt">EMT</string>
+    <string name="manager">Manager</string>
 </resources>
